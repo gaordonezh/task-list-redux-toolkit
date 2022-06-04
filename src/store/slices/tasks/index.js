@@ -19,6 +19,6 @@ export default taskSlice.reducer;
 
 export const fetchAllTasks = () => (dispatch) => {
   getTasks()
-    .then((res) => dispatch(setTaskList(res.data)))
+    .then((res) => dispatch(setTaskList(res)))
     .catch((error) => console.log(error));
 };

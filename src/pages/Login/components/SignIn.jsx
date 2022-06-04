@@ -9,24 +9,24 @@ import Notification from "components/Notification";
 import StorageService from "config/StorageService";
 import { SESSION_USER } from "config/session";
 import { useNavigate } from "react-router-dom";
+import { setCurrentUser } from "store/slices/user";
+import { useDispatch } from "react-redux";
 
 const SignIn = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
   const [error, setError] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, formState } = useForm();
 
   const handleLogin = async (items) => {
     try {
       setLoading(true);
       const res = await signInUser(items);
-      StorageService.set(SESSION_USER, res.token);
-      navigate("/chat");
+      StorageService.set(SESSION_USER, { token: res.token, user: res.user._id });
+      dispatch(setCurrentUser(res.user));
+      navigate("/tasks");
     } catch (error) {
       setError(true);
     } finally {
@@ -57,7 +57,7 @@ const SignIn = () => {
               </InputAdornment>
             ),
           }}
-          error={Boolean(errors?.username ?? false)}
+          error={Boolean(formState.errors?.username ?? false)}
           {...register("username", { required: true })}
           onKeyDown={() => error && setError(false)}
         />
@@ -72,7 +72,7 @@ const SignIn = () => {
               </InputAdornment>
             ),
           }}
-          error={Boolean(errors?.password ?? false)}
+          error={Boolean(formState.errors?.password ?? false)}
           {...register("password", { required: true })}
           onKeyDown={() => error && setError(false)}
         />

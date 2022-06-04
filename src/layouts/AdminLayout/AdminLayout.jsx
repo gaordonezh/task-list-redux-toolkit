@@ -1,9 +1,10 @@
-import { Fragment, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import Header from "./components/Header";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserInfo } from "requests/user";
 import { setCurrentUser } from "store/slices/user";
+import { Box, Container } from "@mui/material";
 
 const AdminLayout = () => {
   const navigate = useNavigate();
@@ -19,11 +20,8 @@ const AdminLayout = () => {
     try {
       setLoading(true);
       const res = await getUserInfo();
-      if (res) {
-        dispatch(setCurrentUser(res));
-      } else {
-        navigate("/");
-      }
+      if (res) dispatch(setCurrentUser(res));
+      else navigate("/");
     } catch (error) {
       navigate("/");
     } finally {
@@ -32,16 +30,22 @@ const AdminLayout = () => {
   };
 
   return (
-    <main>
-      {loading ? (
-        "CARGANDOOO"
-      ) : (
-        <Fragment>
-          <Navbar />
-          <Outlet />
-        </Fragment>
-      )}
-    </main>
+    <div className="admin">
+      <main className="admin__layout">
+        {loading ? (
+          "CARGANDOOO"
+        ) : (
+          <Container maxWidth="lg">
+            <Box py={3}>
+              <Header />
+              <Box className="main__container">
+                <Outlet />
+              </Box>
+            </Box>
+          </Container>
+        )}
+      </main>
+    </div>
   );
 };
 

@@ -1,18 +1,21 @@
+import React, { useEffect } from "react";
 import Page from "components/Page";
-import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { fetchAllTasks } from "store/slices/tasks";
+import Tasks from "./Tasks";
+import Create from "./Tasks/Create";
 
 const Home = () => {
-  /* const info = useSelector((state) => console.log(state));
+  const dispatch = useDispatch();
 
-  console.log("HOMEEEEEEEEEEEEEEEEE", info); */
+  useEffect(() => {
+    dispatch(fetchAllTasks());
+  }, []);
 
   return (
     <Page title="Lista de tareas">
-      <div>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A quo repellat laudantium facilis qui, quidem aspernatur
-        iusto dicta earum saepe.
-      </div>
+      <Tasks />
+      <Create />
     </Page>
   );
 };

@@ -9,7 +9,7 @@ const Page = ({ children, title }) => {
         <meta name="title" content={`${title}`} />
       </Helmet>
 
-      <main style={{ position: "relative" }}>{children}</main>
+      <main>{children}</main>
     </React.Fragment>
   );
 };

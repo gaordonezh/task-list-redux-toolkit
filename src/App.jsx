@@ -6,7 +6,7 @@ import ConfigRoutes from "routes";
 
 const App = () => {
   return (
-    <ThemeConfig mode="dark">
+    <ThemeConfig>
       <GlobalStyles />
       <BrowserRouter>
         <ConfigRoutes />
