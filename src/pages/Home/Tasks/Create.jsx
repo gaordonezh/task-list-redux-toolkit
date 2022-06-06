@@ -1,24 +1,18 @@
 import React, { useState } from "react";
 import { Fab, InputAdornment, TextField } from "@mui/material";
-import { postTasks } from "requests/taks";
 import { Add, ArrowCircleUp } from "@mui/icons-material";
-import { fetchAllTasks } from "store/slices/tasks";
+import { createTask } from "store/slices/tasks";
 import { useDispatch } from "react-redux";
 
 const Create = () => {
   const dispatch = useDispatch();
   const [text, setText] = useState("");
 
-  const saveTask = async () => {
-    try {
-      if (text) {
-        const toSend = { name: text, description: "----------" };
-        await postTasks(toSend);
-        setText("");
-        dispatch(fetchAllTasks());
-      }
-    } catch (error) {
-      console.log(error);
+  const saveTask = () => {
+    if (text) {
+      const toSend = { name: text, description: "----------" };
+      createTask(toSend, dispatch);
+      setText("");
     }
   };
 

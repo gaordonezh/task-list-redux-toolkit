@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getTasks, updateTask } from "requests/taks";
+import { postTasks, deleteTask, getTasks, putTask } from "requests/taks";
 
 const taskSlice = createSlice({
   name: "tasks",
@@ -17,12 +17,7 @@ const { setTaskList } = taskSlice.actions;
 
 export default taskSlice.reducer;
 
-export const fetchAllTasks = () => (dispatch) => {
-  getTasks()
-    .then((res) => dispatch(setTaskList(res)))
-    .catch((error) => console.log(error));
-};
-
-export const changeStatus = (status, code, dispatch) => () => {
-  updateTask({ status }, code).then(() => dispatch(fetchAllTasks()));
-};
+export const fetchAllTasks = () => (dispatch) => getTasks().then((res) => dispatch(setTaskList(res)));
+export const createTask = (body, dispatch) => () => postTasks(body).then(() => dispatch(fetchAllTasks()));
+export const updateTask = (body, code, dispatch) => putTask(body, code).then(() => dispatch(fetchAllTasks()));
+export const removeTask = (code, dispatch) => () => deleteTask(code).then(() => dispatch(fetchAllTasks()));

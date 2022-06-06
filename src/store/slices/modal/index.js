@@ -7,14 +7,17 @@ const modalSlice = createSlice({
     data: {},
   },
   reducers: {
-    setModalList: (state, action) => {
-      state.modalList = action.payload;
-    },
     setOpen: (state, action) => {
       state.open = true;
       state.data = action.payload;
     },
+    setClose: (state) => {
+      state.open = false;
+      state.data = {};
+    },
   },
 });
+
+export const { setOpen, setClose } = modalSlice.actions;
 
 export default modalSlice.reducer;

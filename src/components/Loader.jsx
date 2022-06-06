@@ -1,12 +1,13 @@
 import { Box, Grid } from "@mui/material";
+import json from "assets/json/loading.json";
+import Animation from "./Animation";
+
 const Loader = () => {
   return (
     <Box p={5} component="section">
-      <Grid container alignItems="center" justifyContent="center" component="article">
-        <Grid item className="preloader__content">
-          <div className="loading"></div>
-          <div className="loading2"></div>
-          <img src="/logo/white.png" height="90px" width="100%" alt="Logo gaordonezh" />
+      <Grid container alignItems="center" justifyContent="center">
+        <Grid item sx={{ width: 350 }}>
+          <Animation src={json} />
         </Grid>
       </Grid>
     </Box>

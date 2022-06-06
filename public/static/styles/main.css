@@ -72,6 +72,7 @@
   border-radius: 0.5rem;
   border: none;
 }
-.float__text textarea {
-  color: #fff;
+textarea,
+input {
+  color: #fff !important;
 }

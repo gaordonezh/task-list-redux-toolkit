@@ -5,6 +5,7 @@ import Pending from "./Pending";
 import Proccess from "./Proccess";
 import { useSelector } from "react-redux";
 import EmptyTasks from "./EmptyTasks";
+import ModalTask from "./ModalTask";
 
 const Tasks = () => {
   const pending = useSelector((state) => state.tasks.taskList.filter((tsk) => tsk.status === "PENDING"));
@@ -22,6 +23,7 @@ const Tasks = () => {
           <Done list={done} />
         </List>
       )}
+      <ModalTask />
     </React.Fragment>
   );
 };

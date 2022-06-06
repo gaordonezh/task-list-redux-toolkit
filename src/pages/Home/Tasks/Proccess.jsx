@@ -11,27 +11,29 @@ import {
   Collapse,
 } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { changeStatus } from "store/slices/tasks";
+import { removeTask, updateTask } from "store/slices/tasks";
 import moment from "moment";
+import { setOpen } from "store/slices/modal";
 
 const Proccess = ({ list }) => {
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const handleUpdate = (code) => () => updateTask({ status: "DONE" }, code, dispatch);
 
   return (
     <React.Fragment>
       {list.length > 0 ? (
         <React.Fragment>
-          <ListItem button sx={{ marginTop: "25px !important", width: 230 }} onClick={() => setOpen(!open)}>
-            <ListItemIcon>{open ? <KeyboardArrowDown color="warning" /> : <ChevronRight color="warning" />}</ListItemIcon>
+          <ListItem button sx={{ marginTop: "25px !important", width: 230 }} onClick={() => setVisible(!visible)}>
+            <ListItemIcon>{visible ? <KeyboardArrowDown color="warning" /> : <ChevronRight color="warning" />}</ListItemIcon>
             <ListItemText primary={`IN PROCCESS (${list.length})`} />
           </ListItem>
 
-          <Collapse in={open}>
+          <Collapse in={visible}>
             {list.map((item, index) => (
               <ListItem key={index}>
                 <ListItemIcon>
-                  <IconButton color="warning" onClick={changeStatus("DONE", item._id, dispatch)}>
+                  <IconButton color="warning" onClick={handleUpdate(item._id)}>
                     <RadioButtonChecked />
                   </IconButton>
                 </ListItemIcon>
@@ -45,9 +47,10 @@ const Proccess = ({ list }) => {
                     </Typography>
                   }
                   secondary={<Typography variant="body2">{item.description}</Typography>}
+                  onClick={() => dispatch(setOpen(item))}
                 />
                 <ListItemSecondaryAction>
-                  <IconButton color="error">
+                  <IconButton color="error" onClick={removeTask(item._id, dispatch)}>
                     <Delete />
                   </IconButton>
                 </ListItemSecondaryAction>

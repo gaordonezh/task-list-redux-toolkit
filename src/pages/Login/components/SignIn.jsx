@@ -8,13 +8,11 @@ import { signInUser } from "requests/auth";
 import Notification from "components/Notification";
 import StorageService from "config/StorageService";
 import { SESSION_USER } from "config/session";
-import { useNavigate } from "react-router-dom";
 import { setCurrentUser } from "store/slices/user";
 import { useDispatch } from "react-redux";
 
 const SignIn = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
   const [error, setError] = useState(false);
@@ -26,7 +24,7 @@ const SignIn = () => {
       const res = await signInUser(items);
       StorageService.set(SESSION_USER, { token: res.token, user: res.user._id });
       dispatch(setCurrentUser(res.user));
-      navigate("/tasks");
+      window.location.href = "/tasks";
     } catch (error) {
       setError(true);
     } finally {

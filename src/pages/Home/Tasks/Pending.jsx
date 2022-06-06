@@ -11,17 +11,19 @@ import {
 } from "@mui/material";
 import moment from "moment";
 import { useDispatch } from "react-redux";
-import { changeStatus } from "store/slices/tasks";
+import { removeTask, updateTask } from "store/slices/tasks";
+import { setOpen } from "store/slices/modal";
 
 const Pending = ({ list }) => {
   const dispatch = useDispatch();
+  const handleUpdate = (code) => () => updateTask({ status: "IN_PROCESS" }, code, dispatch);
 
   return (
     <React.Fragment>
       {list.map((row, index) => (
         <ListItem key={index}>
           <ListItemIcon>
-            <IconButton color="primary" onClick={changeStatus("IN_PROCESS", row._id, dispatch)}>
+            <IconButton color="primary" onClick={handleUpdate(row._id)}>
               <RadioButtonUnchecked />
             </IconButton>
           </ListItemIcon>
@@ -35,9 +37,10 @@ const Pending = ({ list }) => {
               </Typography>
             }
             secondary={<Typography variant="body2">{row.description}</Typography>}
+            onClick={() => dispatch(setOpen(row))}
           />
           <ListItemSecondaryAction>
-            <IconButton color="error">
+            <IconButton color="error" onClick={removeTask(row._id, dispatch)}>
               <Delete />
             </IconButton>
           </ListItemSecondaryAction>

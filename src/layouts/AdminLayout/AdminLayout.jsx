@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getUserInfo } from "requests/user";
 import { setCurrentUser } from "store/slices/user";
 import { Box, Container } from "@mui/material";
+import Loader from "components/Loader";
 
 const AdminLayout = () => {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ const AdminLayout = () => {
 
   useLayoutEffect(() => {
     if (!currentUser._id) handleToken();
+    // eslint-disable-next-line
   }, []);
 
   const handleToken = async () => {
@@ -33,7 +35,7 @@ const AdminLayout = () => {
     <div className="admin">
       <main className="admin__layout">
         {loading ? (
-          "CARGANDOOO"
+          <Loader />
         ) : (
           <Container maxWidth="lg">
             <Box py={3}>

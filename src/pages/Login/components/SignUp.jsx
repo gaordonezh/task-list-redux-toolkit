@@ -8,12 +8,10 @@ import { useForm } from "react-hook-form";
 import { signInUser, signUpUser } from "requests/auth";
 import StorageService from "config/StorageService";
 import { SESSION_USER } from "config/session";
-import { useNavigate } from "react-router-dom";
 import { setCurrentUser } from "store/slices/user";
 import { useDispatch } from "react-redux";
 
 const SignUp = () => {
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({ message: "", open: false });
   const { register, handleSubmit, formState } = useForm();
@@ -33,7 +31,7 @@ const SignUp = () => {
       const login = await signInUser({ username: res.username, password: items.password });
       StorageService.set(SESSION_USER, { token: login.token, user: login.user._id });
       dispatch(setCurrentUser(login.user));
-      navigate("/tasks");
+      window.location.href = "/tasks";
     } catch (error) {
       setError({ message: "El correo ya está siendo usada por otra persona.", open: true });
     } finally {

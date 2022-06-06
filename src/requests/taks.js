@@ -16,8 +16,15 @@ export const postTasks = async (body) => {
   return res.data;
 };
 
-export const updateTask = async (body, taskId) => {
+export const putTask = async (body, taskId) => {
   const res = await axios.put(`${API_BASE}/notes/${taskId}`, body, {
+    headers: { Authorization: UserService.token() },
+  });
+  return res.data;
+};
+
+export const deleteTask = async (taskId) => {
+  const res = await axios.delete(`${API_BASE}/notes/${taskId}`, {
     headers: { Authorization: UserService.token() },
   });
   return res.data;
