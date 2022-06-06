@@ -8,10 +8,8 @@ import EmptyTasks from "./EmptyTasks";
 
 const Tasks = () => {
   const pending = useSelector((state) => state.tasks.taskList.filter((tsk) => tsk.status === "PENDING"));
-  const proccess = useSelector((state) => state.tasks.taskList.filter((tsk) => tsk.status === "IN_PROCCESS"));
+  const proccess = useSelector((state) => state.tasks.taskList.filter((tsk) => tsk.status === "IN_PROCESS"));
   const done = useSelector((state) => state.tasks.taskList.filter((tsk) => tsk.status === "DONE"));
-
-  console.log(pending);
 
   return (
     <React.Fragment>

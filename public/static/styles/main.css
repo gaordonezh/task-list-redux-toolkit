@@ -24,7 +24,7 @@
 }
 
 .main__container {
-  height: calc(100vh - 117px);
+  height: calc(100vh - 120px);
   overflow-y: auto;
   position: relative;
 }
@@ -64,7 +64,7 @@
 /* TEXTFIELD */
 
 .float__text {
-  position: absolute;
+  position: sticky;
   bottom: 0;
   left: 0;
   right: 0;
