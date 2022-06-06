@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getTasks } from "../../../requests/taks";
+import { getTasks, updateTask } from "requests/taks";
 
 const taskSlice = createSlice({
   name: "tasks",
@@ -21,4 +21,8 @@ export const fetchAllTasks = () => (dispatch) => {
   getTasks()
     .then((res) => dispatch(setTaskList(res)))
     .catch((error) => console.log(error));
+};
+
+export const changeStatus = (status, code, dispatch) => () => {
+  updateTask({ status }, code).then(() => dispatch(fetchAllTasks()));
 };

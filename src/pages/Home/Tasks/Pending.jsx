@@ -10,24 +10,18 @@ import {
   Typography,
 } from "@mui/material";
 import moment from "moment";
-import { updateTask } from "requests/taks";
 import { useDispatch } from "react-redux";
-import { fetchAllTasks } from "store/slices/tasks";
+import { changeStatus } from "store/slices/tasks";
 
 const Pending = ({ list }) => {
   const dispatch = useDispatch();
-
-  const changeStatus = (status, code) => async () => {
-    await updateTask({ status }, code);
-    dispatch(fetchAllTasks());
-  };
 
   return (
     <React.Fragment>
       {list.map((row, index) => (
         <ListItem key={index}>
           <ListItemIcon>
-            <IconButton color="primary" onClick={changeStatus("IN_PROCESS", row._id)}>
+            <IconButton color="primary" onClick={changeStatus("IN_PROCESS", row._id, dispatch)}>
               <RadioButtonUnchecked />
             </IconButton>
           </ListItemIcon>
