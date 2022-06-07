@@ -1,0 +1,6 @@
+{
+  "editor.formatOnSave": true,
+  "printWidth": 125,
+  "singleQuote": false,
+  "trailingComma": "es5"
+}

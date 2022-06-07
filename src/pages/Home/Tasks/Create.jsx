@@ -10,8 +10,7 @@ const Create = () => {
 
   const saveTask = () => {
     if (text) {
-      const toSend = { name: text, description: "----------" };
-      createTask(toSend, dispatch);
+      createTask({ name: text }, dispatch);
       setText("");
     }
   };

@@ -1,8 +1,7 @@
-import { Drawer, Card, CardHeader, CardContent, CardActions, TextField, Stack, Alert } from "@mui/material";
+import { Drawer, Card, CardHeader, CardContent, CardActions, TextField, Stack, Alert, Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setClose } from "store/slices/modal";
 import { useEffect, useState } from "react";
-import { LoadingButton } from "@mui/lab";
 import { updateTask } from "store/slices/tasks";
 
 const color = { PENDING: "info", IN_PROCESS: "warning", DONE: "success" };
@@ -27,6 +26,8 @@ const ModalTask = () => {
     updateTask(info, modal.data._id, dispatch);
     handleClose();
   };
+
+  const disable = info.description?.length < 10 || info.name?.length < 5;
 
   return (
     <Drawer open={modal.open} anchor="right" onClose={handleClose}>
@@ -58,12 +59,12 @@ const ModalTask = () => {
           </Stack>
         </CardContent>
         <CardActions>
-          <LoadingButton onClick={handleClose} variant="outlined" fullWidth size="large" color="error">
+          <Button onClick={handleClose} variant="outlined" fullWidth size="large" color="error">
             CANCELAR
-          </LoadingButton>
-          <LoadingButton onClick={handleUpdate} variant="contained" fullWidth size="large">
+          </Button>
+          <Button onClick={handleUpdate} variant="contained" fullWidth size="large" disabled={disable}>
             ACTUALIZAR
-          </LoadingButton>
+          </Button>
         </CardActions>
       </Card>
     </Drawer>
