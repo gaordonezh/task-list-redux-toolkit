@@ -10,6 +10,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(fetchAllTasks());
+    // eslint-disable-next-line
   }, []);
 
   return (
