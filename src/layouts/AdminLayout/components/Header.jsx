@@ -1,6 +1,6 @@
-import { IconButton, Stack, Typography } from "@mui/material";
-import { Apps } from "@mui/icons-material";
+import { Stack, Typography } from "@mui/material";
 import moment from "moment";
+import UserSettings from "./UserSettings";
 
 const Header = () => (
   <Stack direction="column" spacing={2}>
@@ -11,9 +11,7 @@ const Header = () => (
         </Typography>
         <Typography variant="body2">{moment().format("dddd, MMMM DD YYYY")}</Typography>
       </Stack>
-      <IconButton color="inherit">
-        <Apps fontSize="large" />
-      </IconButton>
+      <UserSettings />
     </Stack>
   </Stack>
 );

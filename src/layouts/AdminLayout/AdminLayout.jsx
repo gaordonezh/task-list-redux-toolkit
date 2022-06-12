@@ -6,6 +6,8 @@ import { getUserInfo } from "requests/user";
 import { setCurrentUser } from "store/slices/user";
 import { Box, Container } from "@mui/material";
 import Loader from "components/Loader";
+import StorageService from "config/StorageService";
+import { SESSION_USER } from "config/session";
 
 const AdminLayout = () => {
   const navigate = useNavigate();
@@ -23,12 +25,17 @@ const AdminLayout = () => {
       setLoading(true);
       const res = await getUserInfo();
       if (res) dispatch(setCurrentUser(res));
-      else navigate("/");
+      else handleRedirect();
     } catch (error) {
-      navigate("/");
+      handleRedirect();
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleRedirect = () => {
+    StorageService.remove(SESSION_USER);
+    navigate("/");
   };
 
   return (
