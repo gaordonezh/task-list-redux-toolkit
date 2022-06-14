@@ -26,8 +26,8 @@ const routes = [
     element: AdminLayout,
     isPrivate: true,
     children: [
-      { path: "/tasks", element: Home },
-      { path: "/profile", element: Profile },
+      { path: "tasks", element: Home },
+      { path: "profile", element: Profile },
       { path: "*", element: Page404 },
     ],
   },
