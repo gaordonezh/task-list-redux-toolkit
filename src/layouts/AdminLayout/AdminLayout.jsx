@@ -45,7 +45,7 @@ const AdminLayout = () => {
       <main
         className="admin__layout"
         style={{
-          backgroundImage: `url(${background ?? "./static/images/backgroundOne.jpg"} )`,
+          backgroundImage: `url(${background ? background : "./static/images/backgroundOne.jpg"})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundPosition: "center center",

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Stack, TextField, Typography, InputAdornment, IconButton } from "@mui/material";
-import { VisibilityOff, Visibility, AccountBox, Email } from "@mui/icons-material";
+import { VisibilityOff, Visibility, AccountBox, Email, Person } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
-import Platforms from "./Platforms";
+/* import Platforms from "./Platforms"; */
 import Notification from "components/Notification";
 import { useForm } from "react-hook-form";
 import { signInUser, signUpUser } from "requests/auth";
@@ -24,7 +24,6 @@ const SignUp = () => {
         return setError({ message: "Las contraseñas no coinciden", open: true });
       }
 
-      items.username = items.email;
       items.position = "Happy person";
 
       const res = await signUpUser(items);
@@ -63,7 +62,27 @@ const SignUp = () => {
           InputProps={{
             endAdornment: (
               <InputAdornment position="start">
-                <AccountBox />
+                <Person sx={{ color: Boolean(formState.errors?.name ?? false) ? "error.main" : "#fff" }} />
+              </InputAdornment>
+            ),
+          }}
+        />
+        <TextField
+          fullWidth
+          label="Usuario"
+          type="text"
+          error={Boolean(formState.errors?.username ?? false)}
+          {...register("username", {
+            required: true,
+            minLength: 3,
+            maxLength: 25,
+            pattern: /^[A-Z0-9]+$/i,
+          })}
+          onKeyDown={handleHidden}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="start">
+                <AccountBox sx={{ color: Boolean(formState.errors?.username ?? false) ? "error.main" : "#fff" }} />
               </InputAdornment>
             ),
           }}
@@ -81,7 +100,7 @@ const SignUp = () => {
           InputProps={{
             endAdornment: (
               <InputAdornment position="start">
-                <Email />
+                <Email sx={{ color: Boolean(formState.errors?.email ?? false) ? "error.main" : "#fff" }} />
               </InputAdornment>
             ),
           }}
@@ -103,10 +122,10 @@ const SignUp = () => {
         <LoadingButton variant="contained" size="large" type="submit" loading={loading}>
           CONTINUAR
         </LoadingButton>
-        <Typography variant="body2" color="text.secondary">
+        {/* <Typography variant="body2" color="text.secondary">
           O registrate con alguna de estas plataformas.
         </Typography>
-        <Platforms />
+        <Platforms /> */}
       </Stack>
     </form>
   );
@@ -131,7 +150,13 @@ const Password = ({ label, errors, register, handleHidden, name }) => {
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">
-            <IconButton onClick={() => setVisible(!visible)}>{visible ? <VisibilityOff /> : <Visibility />}</IconButton>
+            <IconButton onClick={() => setVisible(!visible)}>
+              {visible ? (
+                <VisibilityOff sx={{ color: Boolean(errors[name] ?? false) ? "error.main" : "#fff" }} />
+              ) : (
+                <Visibility sx={{ color: Boolean(errors[name] ?? false) ? "error.main" : "#fff" }} />
+              )}
+            </IconButton>
           </InputAdornment>
         ),
       }}

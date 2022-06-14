@@ -23,7 +23,7 @@ const Login = () => {
   };
 
   return (
-    <Page title="Iniciar Sesión">
+    <Page title="Welcome">
       <Box className={`container ${view ? "sign-up-mode" : ""}`}>
         <Box className="forms-container">
           <Box className="signin-signup">

@@ -14,7 +14,7 @@ const Home = () => {
   }, []);
 
   return (
-    <Page title="Lista de tareas">
+    <Page title="Task list">
       <Tasks />
       <Create />
     </Page>

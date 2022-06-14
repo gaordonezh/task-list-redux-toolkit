@@ -63,7 +63,10 @@ const Modal = ({ open, setOpen, images, dispatch, userId }) => {
     await putUser({ background }, userId);
   };
 
-  const toProfile = () => navigate("/profile");
+  const toProfile = () => {
+    navigate("/profile");
+    setOpen();
+  };
 
   return (
     <Drawer open={open} anchor="right" onClose={setOpen}>

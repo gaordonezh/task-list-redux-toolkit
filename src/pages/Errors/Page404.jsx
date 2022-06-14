@@ -5,7 +5,7 @@ import json from "assets/json/empty.json";
 
 const Page404 = () => {
   return (
-    <Page title="Página no encontrada...">
+    <Page title="Page not found...">
       <Grid container minHeight="100vh" component="section" alignItems="center" justifyContent="center">
         <Grid item sx={{ width: 300 }}>
           <Typography variant="h1" align="center">

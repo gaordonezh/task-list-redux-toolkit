@@ -17,6 +17,20 @@ body {
   min-height: 100vh;
   overflow: hidden;
   background-color: #050505;
+  background-image: url(../images/backgroundOne.jpg);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.25);
 }
 
 .forms-container {
@@ -138,7 +152,7 @@ form.sign-in-form {
 
 .right-panel .image,
 .right-panel .content {
-  transform: translateX(800px);
+  transform: translateX(100vw);
 }
 
 /* ANIMATION */
@@ -150,7 +164,7 @@ form.sign-in-form {
 
 .container.sign-up-mode .left-panel .image,
 .container.sign-up-mode .left-panel .content {
-  transform: translateX(-800px);
+  transform: translateX(-100vw);
 }
 
 .container.sign-up-mode .signin-signup {

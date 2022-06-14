@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { putUser } from "requests/user";
 
 const userSlice = createSlice({
   name: "users",
@@ -27,3 +28,7 @@ const userSlice = createSlice({
 export const { setCurrentUser, setImages, setModal, setBackground } = userSlice.actions;
 
 export default userSlice.reducer;
+
+export const updateUser = (body, code, dispatch) => {
+  putUser(body, code).then((res) => dispatch(setCurrentUser(res)));
+};

@@ -5,7 +5,7 @@ import json from "assets/json/empty.json";
 
 const Page401 = () => {
   return (
-    <Page title="Cargando...">
+    <Page title="Loading...">
       <Grid container minHeight="100vh" component="section" alignItems="center" justifyContent="center">
         <Grid item sx={{ width: 300 }}>
           <Typography variant="h1" align="center">

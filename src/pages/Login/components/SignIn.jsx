@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Stack, TextField, Typography, IconButton, InputAdornment } from "@mui/material";
 import { VisibilityOff, Visibility, AccountBox } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
-import Platforms from "./Platforms";
+/* import Platforms from "./Platforms"; */
 import { useForm } from "react-hook-form";
 import { signInUser } from "requests/auth";
 import Notification from "components/Notification";
@@ -78,11 +78,11 @@ const SignIn = () => {
           INGRESAR
         </LoadingButton>
 
-        <Typography variant="body2" color="text.secondary">
+        {/* <Typography variant="body2" color="text.secondary">
           O inicia sesión con alguna de estas plataformas.
         </Typography>
 
-        <Platforms />
+        <Platforms /> */}
       </Stack>
     </form>
   );
