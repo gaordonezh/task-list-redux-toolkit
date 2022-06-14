@@ -1,4 +1,3 @@
-// const API_BASE = "http://192.168.0.17:3000/api";
-const API_BASE = "https://take-notes-backend-carloscdev.herokuapp.com/api";
-
-export default API_BASE;
+export const API_BASE = process.env.REACT_APP_API_BASE;
+export const KEY_UNSPLASH = process.env.REACT_APP_UNSPLASH_KEY;
+export const API_UNSPLASH = process.env.REACT_APP_UNSPLASH_API;

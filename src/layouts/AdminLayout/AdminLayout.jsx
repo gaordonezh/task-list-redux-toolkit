@@ -3,7 +3,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import Header from "./components/Header";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserInfo } from "requests/user";
-import { setCurrentUser } from "store/slices/user";
+import { setCurrentUser, setBackground } from "store/slices/user";
 import { Box, Container } from "@mui/material";
 import Loader from "components/Loader";
 import StorageService from "config/StorageService";
@@ -11,7 +11,7 @@ import { SESSION_USER } from "config/session";
 
 const AdminLayout = () => {
   const navigate = useNavigate();
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, background } = useSelector((state) => state.user);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
@@ -24,8 +24,10 @@ const AdminLayout = () => {
     try {
       setLoading(true);
       const res = await getUserInfo();
-      if (res) dispatch(setCurrentUser(res));
-      else handleRedirect();
+      if (res) {
+        dispatch(setCurrentUser(res));
+        dispatch(setBackground(res.background));
+      } else handleRedirect();
     } catch (error) {
       handleRedirect();
     } finally {
@@ -40,7 +42,15 @@ const AdminLayout = () => {
 
   return (
     <div className="admin">
-      <main className="admin__layout">
+      <main
+        className="admin__layout"
+        style={{
+          backgroundImage: `url(${background ?? "./static/images/backgroundOne.jpg"} )`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
+        }}
+      >
         {loading ? (
           <Loader />
         ) : (
