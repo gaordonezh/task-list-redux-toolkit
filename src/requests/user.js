@@ -19,8 +19,15 @@ export const getUnsplashImages = async (page = 1, per_page = 30, order_by = "pop
   return res;
 };
 
-export const putUser = async (data, userId) => {
-  const result = await axios.put(`${API_BASE}/user/profile/${userId}`, data, {
+export const putUser = async (data) => {
+  const result = await axios.put(`${API_BASE}/user/profile/${UserService.user()}`, data, {
+    headers: { Authorization: UserService.token() },
+  });
+  return result.data;
+};
+
+export const updatePassword = async (data) => {
+  const result = await axios.put(`${API_BASE}/user/password/${UserService.user()}`, data, {
     headers: { Authorization: UserService.token() },
   });
   return result.data;

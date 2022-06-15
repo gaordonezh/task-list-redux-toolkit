@@ -17,7 +17,7 @@ const routes = [
     element: PublicLayout,
     isPrivate: false,
     children: [
-      { path: "", element: Login },
+      { path: "/", element: Login },
       { path: "*", element: Page404 },
     ],
   },

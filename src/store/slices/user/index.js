@@ -7,7 +7,7 @@ const userSlice = createSlice({
     currentUser: {},
     images: [],
     modal: false,
-    background: undefined,
+    background: "",
   },
   reducers: {
     setCurrentUser: (state, action) => {

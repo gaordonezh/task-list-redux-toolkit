@@ -18,6 +18,7 @@ import { LoadingButton } from "@mui/lab";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { updateUser } from "store/slices/user";
 import Notification from "components/Notification";
+import { updatePassword } from "requests/user";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -34,19 +35,16 @@ const Profile = () => {
   const handleChange = (key, value) => setValues({ ...values, [key]: value });
   const handleChangePass = (key, value) => setPass({ ...pass, [key]: value });
 
-  const handleUpdateInfo = () => {
-    dispatch(updateUser(values, currentUser._id, dispatch));
-  };
+  const handleUpdateInfo = () => dispatch(updateUser(values, currentUser._id, dispatch));
 
-  const test = async () => {
+  const handleUpdatePassword = async () => {
+    await updatePassword({ password: pass.new });
     setMsg({ alert: false, loading: true });
     await sleep(500);
     setMsg({ alert: true, loading: false });
-    await sleep(1000);
+    await sleep(2000);
     setMsg({ alert: false, loading: false });
   };
-
-  const handleUpdatePassword = () => {};
 
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -114,7 +112,6 @@ const Profile = () => {
                   />
                 </Grid>
                 <Grid item xs={12} textAlign="right">
-                  <Notification title="Success" message="Your information has updated" type="success" open={msg.alert} />
                   <LoadingButton variant="contained" size="large" onClick={handleUpdateInfo} loading={msg.loading}>
                     UPDATE INFORMATION
                   </LoadingButton>
@@ -145,10 +142,13 @@ const Profile = () => {
                     onChange={(event) => handleChangePass("confirm", event.target.value)}
                   />
                 </Grid>
-                <Grid item xs={12} textAlign="right">
-                  <LoadingButton variant="contained" size="large" onClick={handleUpdatePassword} loading={msg.loading}>
-                    UPDATE PASSWORD
-                  </LoadingButton>
+                <Grid item xs={12}>
+                  <Stack spacing={2} justifyContent="space-between" direction="row">
+                    <Notification title="Your information has updated" type="success" open={msg.alert} />
+                    <LoadingButton variant="contained" size="large" onClick={handleUpdatePassword} loading={msg.loading}>
+                      UPDATE PASSWORD
+                    </LoadingButton>
+                  </Stack>
                 </Grid>
               </Grid>
             </Box>

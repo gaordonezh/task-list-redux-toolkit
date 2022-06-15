@@ -23,7 +23,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const UserSettings = () => {
   const dispatch = useDispatch();
-  const { modal, images, currentUser } = useSelector((state) => state.user);
+  const { modal, images } = useSelector((state) => state.user);
 
   const handleToggleModal = () => dispatch(setModal());
 
@@ -32,14 +32,14 @@ const UserSettings = () => {
       <IconButton color="inherit" onClick={handleToggleModal}>
         <Apps fontSize="large" />
       </IconButton>
-      <Modal open={modal} setOpen={handleToggleModal} images={images} dispatch={dispatch} userId={currentUser._id} />
+      <Modal open={modal} setOpen={handleToggleModal} images={images} dispatch={dispatch} />
     </React.Fragment>
   );
 };
 
 export default UserSettings;
 
-const Modal = ({ open, setOpen, images, dispatch, userId }) => {
+const Modal = ({ open, setOpen, images, dispatch }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -60,7 +60,7 @@ const Modal = ({ open, setOpen, images, dispatch, userId }) => {
   const handleSetImage = (info) => async () => {
     const background = info.images.regular;
     dispatch(setBackground(background));
-    await putUser({ background }, userId);
+    await putUser({ background });
   };
 
   const toProfile = () => {
